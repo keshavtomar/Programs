@@ -12,9 +12,10 @@ int main(void)
     int a[102][102] = {0};
     for (int i = 1; i < n; i++)
     {
+        cout<<" ";
         for (int k = 0; k < spaces; k++)
         {
-            cout << " ";
+            cout << "  ";
         }
         for (int j = 0; j < i; j++)
         {
@@ -29,7 +30,7 @@ int main(void)
             cout << a[i][j];
             if (j != i - 1)
             {
-                cout << " ";
+                cout << "   ";
             }
         }
         spaces--;
