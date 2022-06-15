@@ -4,6 +4,7 @@
 using namespace std;
 
 int main(void){
-    int x=9, y=1;
-    cout<<(x^y);
+    int x;
+    cin>>x;
+    cout<<(x%1000000007);
 }

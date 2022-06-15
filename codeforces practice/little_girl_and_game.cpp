@@ -7,43 +7,46 @@ int main(void)
 {
     string st;
     cin >> st;
-    int n = st.length();
-    bool presence_of_single_odd = 0;
- 
-   // after the presence of single odd if total no of letters is odd, than no of odds present in the string should be odd
 
-
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < st.length(); i++)
     {
-        bool couple_exist = 0;
-        for (int j = 0; j < n; j++)
+        for (int j = 0; j < st.length() - i - 1; j++)
         {
-            if (st[i] == st[j] && i != j)
+            if (st[j] > st[j + 1])
             {
-                couple_exist = 1;
-                break;
+                char temp = st[j];
+                st[j] = st[j + 1];
+                st[j + 1] = temp;
             }
         }
-        if (couple_exist == 0)
-        {
-            presence_of_single_odd = 1;
-            break;
+    }
+    
+
+// cout<<st;
+    int no_of_odds=0;
+    int cur_letter=1;
+    for(int i=0; i<st.length();i++){
+        if(st[i]==st[i+1]){
+            cur_letter++;
+        }
+        else{
+            if(cur_letter%2==1){
+                 no_of_odds++;
+                //  cout<<i<<endl;
+            }
+            cur_letter=1;
         }
     }
-    if (!presence_of_single_odd)
-    {
-        cout << "First" << endl;
-        // cout << "This works" << endl;
+
+    // cout<<no_of_odds<<endl;
+
+    if(no_of_odds==0||no_of_odds==1){
+        cout<<"First"<<endl;
     }
-    else
-    {
-        if (n % 2 == 0)
-        {
-            cout << "Second" << endl;
-        }
-        else
-        {
-            cout << "First" << endl;
-        }
+    else if(no_of_odds%2==0){
+        cout<<"Second"<<endl;
+    }
+    else{
+        cout<<"First"<<endl;
     }
 }
