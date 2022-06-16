@@ -2,8 +2,8 @@
 #include <iostream>
 #include <algorithm>
 #include <cmath>
-#include <vector>
 #include <string>
+#include <string.h>
 
 using namespace std;
 
@@ -11,31 +11,13 @@ bool isfirstlarge(int a, int b)
 {
     // x is the size of a and y is the size of b
 
-    
-    int x = to_string(a).length();
-    int y = to_string(b).length();
+    string x = to_string(a);
+    string y = to_string(b);
 
-    while (x && y)
-    {
-        int s = (pow(10, (x - 1)));
-        s = a / s;
-        int t = pow(10, (y - 1));
-        t = b / t;
-        if (s == t)
-        {
-            x--;
-            y--;
-        }
-        else if (s > t)
-        {
-            return 1;
-        }
-        else
-        {
-            return 0;
-        }
-    }
-    if (a > b)
+    string xy = x + y;
+    string yx = y + x;
+
+    if (xy > yx)
     {
         return 1;
     }
