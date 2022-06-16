@@ -1,15 +1,5 @@
-#include <iostream>
-#include <algorithm>
-
-using namespace std;
-
-int main(void)
-{
-    int n;
-    cin >> n;
-    int i = 1;
-    while (i <= n)
-    {
-        int j = 1;
-        while (j <= i)
-        {
+2
+// 4
+// 54 546 548 60
+// 57 3 203 1 67
+// 6757320316384000

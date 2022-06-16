@@ -9,19 +9,11 @@ using namespace std;
 
 bool isfirstlarge(int a, int b)
 {
-    int x = 0, y = 0; // x is the size of a and y is the size of b
-    int dummy1 = a;
-    int dummy2 = b;
-    while (dummy1)
-    {
-        x++;
-        dummy1 /= 10;
-    }
-    while (dummy2)
-    {
-        y++;
-        dummy2 /= 10;
-    }
+    // x is the size of a and y is the size of b
+
+    
+    int x = to_string(a).length();
+    int y = to_string(b).length();
 
     while (x && y)
     {
@@ -57,10 +49,11 @@ int main(void)
 {
     int t;
     cin >> t;
-
-        int a[100];
+    while (t--)
+    {
         int n;
         cin >> n;
+        int a[n];
         int max = 0;
         for (int i = 0; i < n; i++)
         {
@@ -73,7 +66,7 @@ int main(void)
 
         for (int i = 0; i < n; i++)
         {
-            for (int j = 0; j < n - i; j++)
+            for (int j = 0; j < n - i - 1; j++)
             {
                 if (!isfirstlarge(a[j], a[j + 1]))
                 {
@@ -84,9 +77,19 @@ int main(void)
             }
         }
 
+        // cout << n << endl;
         for (int i = 0; i < n; i++)
         {
-           cout<<a[i];
+            cout << a[i];
         }
-        cout<<endl;
+        cout << endl;
+    }
 }
+
+/*
+2
+4
+54 546 548 60
+5
+57 3 203 1 67
+*/

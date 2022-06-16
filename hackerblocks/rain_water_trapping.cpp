@@ -9,49 +9,44 @@ int main(void)
     cin >> t;
     while (t--)
     {
-        int n, max, a[1000000];
+        int n;
         long long int stored_water = 0;
         cin >> n;
-
+        int a[n];
         for (int i = 0; i < n; i++)
         {
             cin >> a[i];
         }
-        int start_index = 0;
-        bool start=0;
-
-        int end_index = 0;
-
-        for (int i = 0; i < n; i++)
+        int i = 1;
+        while (i < n - 1)
         {
-
-            if (a[i] > a[i + 1] && !start)
+            int j = i - 1;
+            int leftmax = 0;
+            while (j >= 0)
             {
-                start=true;
-                start_index = i;
+                if (leftmax < a[j])
+                {
+                    leftmax = a[j];
+                }
+                j--;
             }
-
-            if (a[i] > a[i-1])
+            int k = i + 1;
+            int rightmax = 0;
+            while (k < n)
             {
-                end_index = i;
+                if (rightmax < a[k])
+                {
+                    rightmax = a[k];
+                }
+                k++;
             }
+            int currstore = min(leftmax, rightmax) - a[i];
+            if (currstore > 0)
+            {
+                stored_water += currstore;
+            }
+            i++;
         }
-
-        // cout<<start_index<<" "<<end_index;
-
-        int highest_level=min(a[start_index],a[end_index]);
-
-        for (int i = start_index+1; i < end_index; i++)
-        {
-            if(a[i]<=highest_level){
-                stored_water+=highest_level-a[i];
-            }
-            else{
-               highest_level=min(a[i],a[end_index]);
-            }
-        }
-        
-        cout<<stored_water<<endl;
-
+        cout << stored_water << endl;
     }
 }
