@@ -3,7 +3,7 @@
 
 using namespace std;
 
-bool anytwooronesumzero(double *arr, int n) // this will return true if any single element is 0 or sum of any two elements is zero
+bool anytwooronesumzero(int *arr, int n) // this will return true if any single element is 0 or sum of any two elements is zero
 {
     for (int i = 0; i < n; i++)
     {
@@ -18,8 +18,9 @@ bool anytwooronesumzero(double *arr, int n) // this will return true if any sing
     return 0;
 }
 
-bool anythreesumzero(double *arr, int n)
+bool anythreesumzero(int *arr, int n)
 {
+    int count = 0;
     if (n < 3)
     {
         return 0;
@@ -28,7 +29,7 @@ bool anythreesumzero(double *arr, int n)
     {
         for (int j = i + 1; j < n - 1; j++)
         {
-            for (int k = j + 1; j < n; j++)
+            for (int k = j + 1; k < n; k++)
             {
                 if (arr[i] + arr[j] + arr[k] == 0)
                 {
@@ -40,9 +41,9 @@ bool anythreesumzero(double *arr, int n)
     return 0;
 }
 
-bool allsumzero(double *arr, int n)
+bool allsumzero(int *arr, int n)
 {
-    double sum = 0;
+    int sum = 0;
     for (int i = 0; i < n; i++)
     {
         sum += arr[i];
@@ -65,12 +66,13 @@ int main(void)
     {
         int n;
         cin >> n;
-        double a[n];
+        int a[n];
         bool possible = 0;
         for (int i = 0; i < n; i++)
         {
             cin >> a[i];
         }
+
 
         if (anytwooronesumzero(a, n) || anythreesumzero(a, n) || allsumzero(a, n))
         {
