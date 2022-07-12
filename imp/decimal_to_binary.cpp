@@ -7,8 +7,6 @@ int main(void)
 {
     //variables used are x, i, count, reverse and binary_value
 
-
-
     int x;
     cin >> x;
     int reverse[35];

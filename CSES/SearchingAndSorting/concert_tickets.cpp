@@ -1,37 +1,54 @@
+
 #include <iostream>
 #include <climits>
 #include <algorithm>
+#include <vector>
+#include <list>
+#include <cmath>
+#include <cstring>
+#include <set>
+
+#define FOR(a, b, c) for (int a = b; a < c; a++)
+#define ll long long int
+#define pb push_back
+#define pp pop_back
 
 using namespace std;
 
-int main(void)
+// bool comp(pair<ll,bool> p1, pair<ll,bool> p2){
+
+// }
+
+int main()
 {
-    int n, m;
+    ll n, m;
     cin >> n >> m;
-    int ticket[20000];
-    for (int i = 0; i < n; i++)
+    multiset<ll, greater<int>> st;
+    ll curr;
+    ll k;
+    FOR(i, 0, n)
     {
-        cin >> ticket[i];
+        cin >> k;
+        st.insert(k);
     }
-    sort(ticket, ticket + n);
-    int priceoffered;
-    for (int i = 0; i < m; i++)
+
+    // for (auto it : st)
+    // {
+    //     cout << it << " ";
+    // }
+
+    FOR(i, 0, m)
     {
-        cin >> priceoffered;
-        if (ticket[0] > priceoffered)
+        cin >> curr;
+        auto it = st.lower_bound(curr);
+        if (it == st.end())
         {
-            cout << -1 << endl;
+            cout << "-1" << endl;
+            continue;
         }
-        else if (ticket[n - 1] <= priceoffered)
-        {
-            cout << ticket[n - 1] << endl;
-            ticket[n - 1] = INT32_MAX;
-        }
-        else
-        {
-            auto t = lower_bound(ticket, ticket + n, priceoffered);
-            cout << ticket[t - ticket - 1] << endl;
-            ticket[t - ticket - 1] = INT32_MAX;
-        }
+        cout << *it << endl;
+        st.erase(it);
     }
+
+    return 0;
 }

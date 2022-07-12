@@ -1,3 +1,6 @@
+// we have to find the index k at which array is rotated
+// array should contain unique elements
+
 #include <iostream>
 #include <climits>
 #include <algorithm>
@@ -13,7 +16,7 @@
 
 using namespace std;
 
-int search(vector<int> &nums, int target)
+int searchRotatedIndex(vector<int> &nums)
 {
     int start = 0;
     int n = nums.size();
@@ -23,28 +26,11 @@ int search(vector<int> &nums, int target)
 
     int pivot = -1; // smallest element index
 
-    // if (nums[start] < nums[end])
-    // {
-    //     if (binary_search(nums.begin(), nums.end(), target))
-    //     {
-    //         int x = lower_bound(nums.begin(), nums.end(), target) - nums.begin();
-    //         return x;
-    //     }
-    //     else
-    //     {
-    //         return -1;
-    //     }
-    // }
-
-    cout << "entering main loop" << endl;
-
     while (start <= end)
     {
-        cout << "running main loop" << endl;
-        cout << "start is " << start << " end is " << end << endl;
         int mid = (start + end) / 2;
 
-        int next = (mid + 1) % n;
+        int next = (mid + 1) % n; // if our mid is last element than doing it's modulus with n, makes sure that it will get compared to 0th element
         int prev = (mid - 1 + n) % n;
 
         if (nums[mid] < nums[next] && nums[mid] < nums[prev])
@@ -64,36 +50,24 @@ int search(vector<int> &nums, int target)
         }
     }
 
-    cout << pivot << endl;
-
-    if (pivot != -1)
-    {
-        FOR(i, pivot, n)
-        {
-            temp.push_back(nums[i]);
-        }
-        FOR(i, 0, pivot)
-        {
-            temp.push_back(nums[i]);
-        }
-    }
-
-    for (auto it : temp)
-    {
-        cout << it << " ";
-    }
-
-    return 0;
+    return pivot;
 }
 
 int main()
 {
-    vector<int> vc = {11, 2, 4, 6, 8};
+    vector<int> vc = {11, 12, 15, 16, 8};
     //--------------- 0    1   2   3  4  5  6  7
 
-    cout << "here we go" << endl;
+    int ind = searchRotatedIndex(vc);
 
-    int ind = search(vc, 5);
+    if (ind == -1)
+    {
+        cout << "array is not rotated at all" << endl;
+    }
+    else
+    {
+        cout << "array is rotated at index " << ind << endl;
+    }
 
     return 0;
 }

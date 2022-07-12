@@ -5,27 +5,47 @@
 
 using namespace std;
 
-bool isPalindrome(int i,char c[]){
-    int len = strlen(c);
-    if(i>=len/2){
-        return 1;
+#include <cstring>
+
+bool checkPalindrome(char input[])
+{
+    // Write your code here
+    int len = strlen(input);
+    if (len <= 1)
+    {
+        return true;
     }
-    else if(c[i]!=c[len-i-1]){
-        return 0;
+
+    if (input[0] != input[len - 1])
+    {
+        return false;
     }
-    else{
-        return isPalindrome(i+1,c);
+    else
+    {
+        input[len - 1] = '\0';
+        bool lesserInput = checkPalindrome(input + 1);
+        if (lesserInput == false)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 }
 
-int main(void){
-    //check if a string is palindrome, using recurssion
+int main(void)
+{
+    // check if a string is palindrome, using recurssion
     char c[40];
-    cin>>c;
-    if(isPalindrome(0,c)){
-        cout<<"Yes given string is a palindrome";
+    cin >> c;
+    if (checkPalindrome(c))
+    {
+        cout << "Yes given string is a palindrome";
     }
-    else{
-        cout<<"No given string is not a palindrome";
+    else
+    {
+        cout << "No given string is not a palindrome";
     }
 }
