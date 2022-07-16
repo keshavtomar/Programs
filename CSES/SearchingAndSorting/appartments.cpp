@@ -1,3 +1,5 @@
+// this is solved using two pointers concept told in LONGA VITA BREVIS video
+
 #include <bits/stdc++.h>
 
 #define FOR(a, b, c) for (int a = b; a < c; a++)
@@ -9,15 +11,16 @@ using namespace std;
 
 int main()
 {
-    int n, m, k;
+    ll n, m, k;
     cin >> n >> m >> k;
-    int a, b;
-    vector<pair<int, int>> va;
-    vector<int> vb; 
+    ll a, b;
+    vector<ll> va;
+    vector<ll> vb;
+    int count = 0;
     for (int i = 0; i < n; i++)
     {
         cin >> a;
-        va.pb({a - k, a + k});
+        va.pb(a);
     }
 
     for (int j = 0; j < m; j++)
@@ -26,28 +29,28 @@ int main()
         vb.pb(b);
     }
 
-    sort(va.begin(),va.end());
+    sort(va.begin(), va.end());
+    sort(vb.begin(), vb.end());
 
-    int count = 0;
+    auto ita = va.begin();
+    auto itb = vb.begin();
 
-    for (int i = 0; i < n; i++)
+    while (ita != va.end() && itb != vb.end())
     {
-        int i1 = lower_bound(vb.begin(), vb.end(), va[i].first) - vb.begin();
-        int i2 = lower_bound(vb.begin(), vb.end(), va[i].second) - vb.begin();
-        if (i2 - i1 == 1 && vb[i1].second == 0)
+        // cout << " first iterator at " << *ita << " and second at " << *itb << endl;
+        if ((*itb >= *ita - k) && (*itb <= *ita + k))
         {
             count++;
-            vb[i1].second = 1;
+            ita++;
+            itb++;
         }
-    }
-    for (int i = 0; i < n; i++)
-    {
-        int i1 = lower_bound(vb.begin(), vb.end(), va[i].first) - vb.begin();
-        int i2 = lower_bound(vb.begin(), vb.end(), va[i].second) - vb.begin();
-        if (i2 - i1 > 1 && vb[i1 + 1].second == 0)
+        else if (*itb < *ita - k)
         {
-            count++;
-            vb[i1 + 1].second = 1;
+            itb++;
+        }
+        else if (*itb > *ita + k)
+        {
+            ita++;
         }
     }
 
