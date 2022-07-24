@@ -19,27 +19,31 @@ int main()
 {
     int t;
     cin >> t;
-    while (t--)
+    int curr;
+    vi vc;
+    FOR(i, 0, t)
     {
-        int x;
-        int a[3];
-        cin >> x;
-        cin >> a[0] >> a[1] >> a[2];
-        bool b[3] = {0};
-        int it = x;
-        while (it != 0)
+        cin >> curr;
+        vc.pb(curr);
+    }
+    sort(vc.begin(), vc.end());
+
+    ll sumtillnow = 0;
+
+    FOR(i, 0, t)
+    {
+        if (vc[i] > sumtillnow + 1)
         {
-            b[it - 1] = 1;
-            it = a[it - 1];
-        }
-        if (b[0] + b[1] + b[2] == 3)
-        {
-            cout << "YES" << endl;
+            break;
         }
         else
         {
-            cout << "NO" << endl;
+            sumtillnow += vc[i];
         }
     }
+
+    ll cantmake = sumtillnow + 1;
+
+    cout << cantmake << endl;
     return 0;
 }
