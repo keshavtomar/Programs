@@ -70,12 +70,12 @@ int main()
     int n;
     cin >> n;
     int A[n];
+    int m;
+    cin >> m;
     for (int i = 0; i < n; i++)
     {
         cin >> A[i];
     }
-    int m;
-    cin >> m;
     Solution ob;
     cout << ob.findPages(A, n, m) << endl;
     return 0;

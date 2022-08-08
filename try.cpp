@@ -1,25 +1,48 @@
 #include <iostream>
-#include <climits>
-#include <algorithm>
-#include <vector>
-#include <list>
-#include <cmath>
-#include <cstring>
-
-#define FOR(a, b, c) for (int a = b; a < c; a++)
-#define ll long long int
-#define pb push_back
-#define pp pop_back
 
 using namespace std;
 
+class Node
+{
+public:
+    int data;
+    Node *next;
+
+    Node(int data)
+    {
+        this->data = data;
+        this->next = NULL;
+    }
+};
+
+void print(Node *head)
+{
+    Node *temp = head;
+
+    while (temp != NULL)
+    {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+}
+
+void increment(Node *head)
+{
+    Node *temp = head;
+    while (temp != NULL)
+    {
+        temp->data++;
+        temp = temp->next;
+    }
+}
+
 int main()
 {
-    string st;
-    FOR(i, 0, 5)
-    {
-        st[i] = 'a';
-    }
-    cout << st;
-    return 0;
+
+    Node *node1 = new Node(10);
+    Node *node2 = new Node(20);
+    node1->next = node2;
+    increment(node1);
+    print(node1);
 }
