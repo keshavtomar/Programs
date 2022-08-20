@@ -6,6 +6,7 @@
 #include <cmath>
 #include <cstring>
 #include <set>
+#include <time.h>
 
 #define FOR(a, b, c) for (int a = b; a < c; a++)
 #define ll long long int
@@ -18,6 +19,17 @@ using namespace std;
 int main()
 {
     string st = "abcdefghijklmnopqrstuvwxyz.";
+
+    srand(time(0));
+
+    int rnd = rand();
+
+    rnd %= 20;
+
+    FOR(i, 0, rnd)
+    {
+        random_shuffle(st.begin(), st.end());
+    }
 
     string str[3];
 

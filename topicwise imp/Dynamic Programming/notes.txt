@@ -1,0 +1,30 @@
+Dynamic programmig use recursion to reach to the solution but just with a advance approach of saving 
+the answers to reduce time of solving
+
+Consider writing the recursive fibonacci code to get the 5th fibonacci number, for 5th fibonacci
+we have to add 3rd and 4th, we calculated 3rd, to find 4th we have have to add 3rd and 2nd, what if
+when we calculated 3rd we would have saved the answer so that when we have to calculate 3rd and 2nd for 4th, 
+we get the 3rd from the saved answer
+
+The technique is to maintain a 2d table, intially initialise it with -1, as we have to return an
+answer save that in table and then return it, before calling recursion to get an answer check the 
+table, if we have already the answer return from there. Create this matrix globally
+To set the whole matrix -1 value, use ' memset(t,-1,sizeof(t)); '
+
+This approach is very helpful to reduce the time complexity of  questions like fibonacci and knapsack
+
+HOW TO CHECK IF A QUESTION INVOLVES DP?
+sol ->  1. Questions involving DP will have a choice at every step(like should we include this or not)
+        2. We will have to calculate the optimal answer(demanding max, min values);
+
+
+
+->
+   There are two approaches to solve dp one is to use recursion + memoization and the other is to 
+   directly use dp table, first one is more easy and understandable
+
+   In direct dp table, we avoid our recursive calls, in rare cases our recursive call stack fills 
+   out completely so to avoid the error we use dp table also known as top down approach
+
+
+

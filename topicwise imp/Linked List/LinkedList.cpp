@@ -200,3 +200,11 @@ void reverseLinkedList(Node *head)
     }
     head = prev;
 }
+
+Node *swap(Node *ptr1, Node *ptr2)
+{
+    Node *tmp = ptr2->next;
+    ptr2->next = ptr1;
+    ptr1->next = tmp;
+    return ptr2;
+}
