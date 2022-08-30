@@ -26,5 +26,30 @@ sol ->  1. Questions involving DP will have a choice at every step(like should w
    In direct dp table, we avoid our recursive calls, in rare cases our recursive call stack fills 
    out completely so to avoid the error we use dp table also known as top down approach
 
+-> note one more error case in knapsack 0/1 when arr[i] is 0, this case has been solved in target_sum
+problem, by counting the no. of zeroes in the given array and multiplying 2 raised to the power cntofzeroes
+with the answer
 
 
+
+
+KNAPSACK
+ knapsack is of 3 types -> Fractional knapsack(this is solved with greedy), 0/1 knapsack, Unbounded knapsack
+
+
+Problems of 0/1 knapsack->
+ - knapsack01
+ - subset_sum_problem
+ - equalsumpartition
+ - perfect sum
+ - minimum_sum_partition
+ - target_sum
+
+
+
+Unbounded knapsack(in this we can choose an element from the given array, any no of times)
+Problems of Unbounded knapsack ->
+ - rod cutting 
+ - coin change 1  (maximum no of ways)
+ - coin change 2  (minimum no of coins)
+ - ribbon cutting

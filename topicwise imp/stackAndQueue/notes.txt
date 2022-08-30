@@ -1,0 +1,75 @@
+Arrays(pros and cons)->
+- size is fixed (cons)
+- access of element in O(1) (pros)
+- insertion and deletion of element is done in O(n) by shifting(cons)
+- we can travel back and forth(pros)
+
+Linked list, singly (pros and cons)->
+-size can vary at runtime(pros)
+-to access element we have to travel the whole list (cons)
+- insertion and deletion in O(1) (pros)
+- we can travel only forth, talking about singly list (cons);
+
+
+
+                                              STACK (LIFO)
+       - abstract data type  (means we can only do our operation on one side only, that is top in stacks)
+       - To implement our advance data types we use arrays and linked list only
+       - Stack can be implemented using both arrays and linkedList
+       - We can make static stack using arrays simply, but also if we want to make our stack dynamic
+         we use the same method, 
+                      - maintain a capacity internally
+                      - if that size is filled, make a new array of double the size, and copy all 
+                        the previous elements
+                      - also double the capacity
+                      - take care of next index
+
+        TEMPLATING-
+           At many times we need different stacks for different datatypes, not only stacks but remember
+           how we specified datatypes while calling construcors in vectors and sets
+              vector<int> vcc;      set<char> stt;
+
+           This is done by templates, when creating a class of a data structure, prefer not to use a 
+           specific datatype but instead write a line on top
+                template <typename T>
+           we can also define multiple typenames for DSs like map and pair, ex template<typename T, typename V>
+
+           and then while creating the entire class use T and V instead of specific datatypes, when the user
+           will call a constructor, he will give a datatype himself, compliler will replace T and V with those
+           datatypes while compiling
+
+
+- We can also implement dynamic stack using linked list    
+
+- While implementing our own datastructures, we can save it in .h files, which can be #include in our code
+like .cpp files, but it differs in just one way that we cannot use int main() in our .h files, int main
+can only be used in the program in which that .h file is included , while
+if we include .cpp file in other program we can use int main() in both
+                    
+
+
+
+                                         QUEUE (FIFO)
+        -abstract data type, element which comes first, will be served first, like normal queues of 
+        burger king
+        -can be implemented by both linkedList and arrays
+
+    QUEUE USING ARRAY STATIC
+     - take size of queue within construcor
+     - maintain a firstIndex and a next index (as we can delete the elements at firstIndex so we have
+      two options one is to shift the complete array to make the space for more newer elements in last
+      and the other better option is we can circulate our newer elements in first as we already have
+      our firstIndex and nextindex)
+
+    QUEUE USING ARRAY DYNAMIC 
+     - In this we use the same previous principle that if our queue is full make a new queue of double
+       the size copy previous elements into new queue, but as in our previous queue our elements may not
+       be in order because we are managing them with frontindex and lastindex so we have to copy the 
+       elements in our new queue in order and change our firstIndex to 0 and lastindex to capacity then 
+       double the capacity (cap*=2)  , in doing this type of copying we have to take care of everything 
+       needed
+
+    QUEUE USING LINKED LIST  
+      - In this we have to maintain two node pointers head and tail, delete from the head(because it is 
+      easier to go to next element) and add into tail, also maintain a size  
+
