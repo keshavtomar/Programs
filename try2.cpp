@@ -17,43 +17,59 @@
 
 using namespace std;
 
-int maxPages(int price[], int pages[], int x, int n, vector<vector<int>> &dp)
-{
-    if (x == 0 || n == 0)
-    {
-        return dp[n][x] = 0;
-    }
-    if (dp[n][x] != -1)
-    {
-        return dp[n][x];
-    }
-
-    if (price[n - 1] > x)
-    {
-        return dp[n][x] = maxPages(price, pages, x, n - 1, dp);
-    }
-    else
-    {
-        return dp[n][x] = max((pages[n - 1] + maxPages(price, pages, x - price[n - 1], n - 1, dp)), maxPages(price, pages, x, n - 1, dp));
-    }
-}
-
 int main()
 {
-    int n, x;
-    cin >> n >> x;
-    int price[n], pages[n];
-    FOR(i, 0, n)
+    int t;
+    cin >> t;
+start:
+    while (t--)
     {
-        cin >> price[i];
-    }
-    FOR(i, 0, n)
-    {
-        cin >> pages[i];
-    }
+        int n;
+        cin >> n;
+        string st;
+        cin >> st;
+        int power[n];
+        FOR(i, 0, n)
+        {
+            cin >> power[i];
+        }
 
-    vector<vector<int>> dp(n + 1, vector<int>(x + 1, -1));
+        set<int> range;
 
-    cout << maxPages(price, pages, x, n, dp);
+        int UsedRange = -1;
+
+        bool spoiled = 0;
+
+        int MaxReach = -1;
+
+        int ans = 0;
+
+        FOR(i, 0, n)
+        {
+            if (st[i] == 'B' && UsedRange < i)
+            {
+                UsedRange = MaxReach;
+                if (i > UsedRange)
+                {
+                    cout << "-1" << endl;
+                    goto start;
+                }
+                ans++;
+                if (i + power[i] > MaxReach)
+                {
+                    MaxReach = i + power[i];
+                }
+            }
+            else
+            {
+                if (i + power[i] > MaxReach)
+                {
+                    MaxReach = i + power[i];
+                }
+            }
+        }
+
+        cout << ans << endl;
+    }
     return 0;
 }
