@@ -1,0 +1,3 @@
+* abs()   function does not work on INTMIN value
+sqrt(x) function does not work on long long x, always use binary search for doing square root
+in dp use vector<ll> dp(n+1,0);         to assign 0 value to n+1 size vector of long long

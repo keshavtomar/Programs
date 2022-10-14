@@ -14,48 +14,73 @@
 #define pp pop_back
 #define vi vector<int>
 #define all(v) v.begin(), v.end()
+#define mod 1000000007
 
 using namespace std;
 
+void solve()
+{
+    char a[8][8];
+    FOR(i, 0, 8)
+    {
+        FOR(j, 0, 8)
+        {
+            cin >> a[i][j];
+        }
+    }
+
+    char ans = '.';
+    FOR(i, 0, 8)
+    {
+        int Rcount = 0;
+        FOR(j, 0, 8)
+        {
+            if (a[i][j] == 'R')
+            {
+                Rcount++;
+            }
+        }
+        if (Rcount == 8)
+        {
+            ans = 'R';
+            break;
+        }
+    }
+    if (ans != '.')
+    {
+        cout << ans << endl;
+        return;
+    }
+
+    FOR(i, 0, 8)
+    {
+        int Rcount = 0;
+        int Bcount = 0;
+        FOR(j, 0, 8)
+        {
+            if (a[j][i] == 'B')
+            {
+                Bcount++;
+            }
+        }
+        if (Bcount == 8)
+        {
+            ans = 'B';
+            break;
+        }
+    }
+
+    cout << ans << endl;
+    return;
+}
+
 int main()
 {
-    int t;
+    int t = 1;
     cin >> t;
     while (t--)
     {
-        int n;
-        cin >> n;
-        ll arr[n];
-        FOR(i, 0, n)
-        {
-            cin >> arr[i];
-        }
-
-        ll fact;
-
-        for (int i = n - 2; i >= 0; i--)
-        {
-            if (arr[i + 1] > 0)
-            {
-                fact = arr[i + 1] / 2;
-                arr[i + 1] -= 2 * fact;
-                arr[i] -= fact;
-            }
-            if (arr[i + 1] == 1 && arr[i] > 0)
-            {
-                arr[i + 1] -= 2;
-                arr[i] -= 1;
-            }
-            // cout << arr[i] << " ";
-        }
-        // cout << arr[n - 1] << endl;
-
-        ll ans = 0;
-        FOR(i, 0, n)
-        {
-            ans += abs(arr[i]);
-        }
-        cout << ans << endl;
+        solve();
     }
     return 0;
 }

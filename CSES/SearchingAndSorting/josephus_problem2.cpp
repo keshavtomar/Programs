@@ -1,5 +1,6 @@
 // we will need a conatainer which will do erase, and which has array like functionality of going
 // to an index, ordered_set will do our work
+//but remember it's functionality is similar to set in inserting and keeping
 
 #include <iostream>
 #include <climits>

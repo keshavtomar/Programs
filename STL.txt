@@ -1006,6 +1006,41 @@ int main() {
 }
 
 
+//ordered_set              ordered_multiset
+//If we want our data structure to be sorted at all times, and we want to traverse through it like we
+//do in vector, we can use ordered_set or ordered_multiset type of data structure
+// These are very useful type of data strucure used in many questions of searching and sorting of CSES 
+//problemset like josephusProblem2 and sliding_median.   
+// These data structure files are not single liners to attach.  To attach ordered set
+         https://www.geeksforgeeks.org/policy-based-data-structures-g/
+
+
+//ordered_set files
+
+/*
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
+
+#define ordered_set tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update>
+*/
+
+
+/*
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
+
+typedef tree<int , null_type ,  less_equal<int> , rb_tree_tag , tree_order_statistics_node_update> ordered_multiset;
+
+
+Deleting in a ordered_multiset is quiet complex (see sliding_median of CSES searching problemset)
+
+int p;       //int value to delete
+stt.erase(stt.find_by_order(stt.order_of_key(p)));
+*/
+
+
 
 
 
