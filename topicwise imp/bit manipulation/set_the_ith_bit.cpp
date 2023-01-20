@@ -5,9 +5,12 @@ using namespace std;
 
 int ithBitSetter(int n, int i)
 {
-    // creating a mask
-    int mask = (1 << i);
-    return (mask | n);
+    int count = 0;
+    while (n % 2 == 0)
+    {
+        count++;
+    }
+    return count;
 }
 
 int main(void)
