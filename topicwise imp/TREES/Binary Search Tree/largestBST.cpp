@@ -1,63 +1,121 @@
 #include <iostream>
-#include "BinarySearchTree.h"
+#include <queue>
 
 using namespace std;
 
-#include <climits>
-class Quad
+template <typename T>
+class BinaryTreeNode
 {
 public:
-    bool isBST;
-    int height;
-    int minV;
-    int maxV;
+    T data;
+    BinaryTreeNode<T> *left;
+    BinaryTreeNode<T> *right;
 
-    Quad(bool a, int b, int c, int d)
+    BinaryTreeNode(T data)
     {
-        isBST = a;
-        height = b;
-        minV = c;
-        maxV = d;
+        this->data = data;
+        left = NULL;
+        right = NULL;
+    }
+    ~BinaryTreeNode()
+    {
+        if (left)
+            delete left;
+        if (right)
+            delete right;
     }
 };
 
-Quad largestBST(BinaryTreeNode<int> *root)
+BinaryTreeNode<int> *takeInput()
+{
+    int rootData;
+
+    cin >> rootData;
+    if (rootData == -1)
+    {
+        return NULL;
+    }
+    BinaryTreeNode<int> *root = new BinaryTreeNode<int>(rootData);
+    queue<BinaryTreeNode<int> *> q;
+    q.push(root);
+    while (!q.empty())
+    {
+        BinaryTreeNode<int> *currentNode = q.front();
+        q.pop();
+        int leftChild, rightChild;
+
+        cin >> leftChild;
+        if (leftChild != -1)
+        {
+            BinaryTreeNode<int> *leftNode = new BinaryTreeNode<int>(leftChild);
+            currentNode->left = leftNode;
+            q.push(leftNode);
+        }
+
+        cin >> rightChild;
+        if (rightChild != -1)
+        {
+            BinaryTreeNode<int> *rightNode =
+                new BinaryTreeNode<int>(rightChild);
+            currentNode->right = rightNode;
+            q.push(rightNode);
+        }
+    }
+    return root;
+}
+class largestBSTReturn
+{
+public:
+    bool isBST;
+    int minimum;
+    int maximum;
+    int largestBSTheight;
+};
+
+largestBSTReturn helper(BinaryTreeNode<int> *root)
 {
     if (root == NULL)
     {
-        Quad a(1, 0, INT_MAX, INT_MIN);
-        return a;
+        largestBSTReturn output;
+        output.isBST = true;
+        output.minimum = INT_MAX;
+        output.maximum = INT_MIN;
+        output.largestBSTheight = 0;
     }
 
-    int me = root->data;
+    largestBSTReturn leftOutput = helper(root->left);
+    largestBSTReturn rightOutput = helper(root->right);
 
-    Quad rightAns = largestBST(root->right);
-    Quad leftAns = largestBST(root->left);
+    int minimum = min(root->data, min(leftOutput.minimum, rightOutput.minimum));
+    int maximum = max(root->data, max(leftOutput.maximum, rightOutput.maximum));
 
-    if (rightAns.isBST && leftAns.isBST && me > leftAns.maxV && me < rightAns.minV)
+    bool isBSTFinal = (root->data < rightOutput.minimum) && (root->data > leftOutput.maximum) && leftOutput.isBST && rightOutput.isBST;
+    int finalHeight;
+    if (isBSTFinal)
     {
-        int heightToreturn = max(leftAns.height, rightAns.height) + 1;
-        int minToreturn = min(rightAns.minV, min(leftAns.minV, me));
-        int maxToreturn = max(rightAns.maxV, max(leftAns.maxV, me));
-
-        Quad a(1, heightToreturn, minToreturn, maxToreturn);
-
-        return a;
+        finalHeight = 1 + max(leftOutput.largestBSTheight, rightOutput.largestBSTheight);
     }
     else
     {
-        Quad a(0, max(leftAns.height, rightAns.height), min(rightAns.minV, min(leftAns.minV, me)), max(rightAns.maxV, max(leftAns.maxV, me)));
-        return a;
+        finalHeight = max(leftOutput.largestBSTheight, rightOutput.largestBSTheight);
     }
+
+    largestBSTReturn output;
+    output.minimum = minimum;
+    output.maximum = maximum;
+    output.isBST = isBSTFinal;
+    output.largestBSTheight = finalHeight;
+    return output;
 }
 
 int largestBSTSubtree(BinaryTreeNode<int> *root)
 {
-    Quad ans = largestBST(root);
-    return ans.height;
+    return helper(root).largestBSTheight;
 }
 
 int main()
 {
-    return 0;
+    BinaryTreeNode<int> *root = takeInput();
+    cout << largestBSTSubtree(root);
+    delete root;
 }
