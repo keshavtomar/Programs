@@ -1,133 +1,74 @@
 #include <bits/stdc++.h>
 
+#define FOR(a, b, c) for (int a = b; a < c; a++)
+#define int long long int
+#define pb push_back
+#define pp pop_back
+#define vi vector<int>
+#define all(v) v.begin(), v.end()
+#define mod 1000000007
+
 using namespace std;
 
-class TrieNode
+
+int helper(int L, bool chefturn, vector<vector<int>> &dp){
+	if(L<=4){
+		if(chefturn){
+			if(L==1||L==2){
+				return 1;
+			}
+			else{
+				return L;
+			}
+		}
+		else{
+			if(L==1){
+				return 0;
+			}
+			else if(L==2||L==3){
+				return 1;
+			}
+			else{
+				return 4;
+			}
+		}
+	}
+
+	if(dp[L][chefturn]!=-1){
+		return dp[L][chefturn];
+	}
+
+	int ans = 0;
+	for(int i=1; i<=4; i++){
+		int x;
+		if(i==1){
+			x = helper(L-i,!chefturn,dp);
+		}
+		else{
+			x=helper(L-i,chefturn,dp);
+		}
+		ans = (ans+x)%mod;
+	}
+
+	return dp[L][chefturn]=ans;
+}
+
+void solve(vector<vector<int>>  &dp)
 {
-public:
-    char data;
-    TrieNode **children;
-    bool isTerminal;
+	int L;
+	cin>>L;
+	cout<<helper(L,true,dp)<<endl;
+	return;
+}
 
-    TrieNode(char data)
-    {
-        this->data = data;
-        children = new TrieNode *[26];
-        for (int i = 0; i < 26; i++)
-        {
-            children[i] = NULL;
-        }
-        isTerminal = false;
-    }
-};
-
-class Trie
+int32_t main()
 {
-    TrieNode *root;
-
-public:
-    int count;
-
-    Trie()
-    {
-        this->count = 0;
-        root = new TrieNode('\0');
-    }
-
-    bool insertWord(TrieNode *root, string word)
-    {
-        // Base case
-        if (word.size() == 0)
-        {
-            if (!root->isTerminal)
-            {
-                root->isTerminal = true;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        // Small calculation
-        int index = word[0] - 'a';
-        TrieNode *child;
-
-        if (root->children[index] != NULL)
-        {
-            child = root->children[index];
-        }
-        else
-        {
-            child = new TrieNode(word[0]);
-            root->children[index] = child;
-        }
-
-        // Recursive call
-        return insertWord(child, word.substr(1));
-    }
-
-    void insertWord(string word)
-    {
-        if (insertWord(root, word))
-        {
-            this->count++;
-        }
-    }
-
-    void helpercomplete(TrieNode *root, string pattern, string temp_list)
-    {
-        temp_list += root->data;
-        // cout<<"we have data as temp- "<<temp_list<<endl;
-        if (pattern.size() == 0)
-        {
-            // temp_list+=root->data;
-            if (root->isTerminal)
-            {
-                cout << temp_list << endl;
-            }
-            for (int i = 0; i < 26; i++)
-            {
-                // cout<<"we enetered for loop"<<endl;
-                if (root->children[i] != NULL)
-                {
-                    // cout<<"we found data at- "<< root->children[i]->data<<endl;
-                    TrieNode *child = root->children[i];
-                    helpercomplete(child, pattern, temp_list);
-                    temp_list.pop_back();
-                }
-            }
-            return;
-        }
-
-        TrieNode *child;
-        int index = pattern[0] - 'a';
-        if (root->children[index] != NULL)
-        {
-            // cout<<"we found - "<< root->children[index]->data<<endl;
-            child = root->children[index];
-            // temp_list+= child->data;
-            // cout<<temp_list<<endl;
-        }
-        else
-        {
-            // cout<<"nothing fond a"<<endl;
-            return;
-        }
-        helpercomplete(child, pattern.substr(1), temp_list);
-        return;
-    }
-
-    void autoComplete(vector<string> input, string pattern)
-    {
-
-        for (int i = 0; i < input.size(); i++)
-        {
-            insertWord(input.at(i));
-            // cout<< input.at(i)<<endl;
-        }
-        string templist;
-        helpercomplete(root, pattern, templist);
-    }
-};
+	int t = 1;
+	cin >> t;
+	vector<vector<int>> dp(100001,vector<int>(2,-1));
+	while (t--)
+	{
+		solve(dp);
+	}
+	return 0;
+}

@@ -1,1 +1,28 @@
-import React from "react";
+#include <bits/stdc++.h>
+
+#define FOR(a, b, c) for (int a = b; a < c; a++)
+#define int long long int
+#define pb push_back
+#define pp pop_back
+#define vi vector<int>
+#define all(v) v.begin(), v.end()
+#define mod 1000000007
+
+using namespace std;
+
+void solve()
+{
+
+    return;
+}
+
+int32_t main()
+{
+    int t = 1;
+    cin >> t;
+    while (t--)
+    {
+        solve();
+    }
+    return 0;
+}
